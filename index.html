@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Project-Work#1_Group-8</title>
+      <link rel="stylesheet" href="./css/style.css" />
+      <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.min.js"></script>
+   </head>
+   <body>
+      <header class="main-header">
+         <h1>Ranks in League of Legend</h1>
+      </header>
+
+      <div id="app" class="container">
+         <div class="card">
+            <img :src="currentItem.images" alt="Image" class="image" />
+            <h1>{{ currentItem.title }}</h1>
+            <p v-if="showDesc">{{ currentItem.desc }}</p>
+            <p v-else>{{ currentItem.title }}</p>
+         </div>
+         <div class="buttons">
+            <button @click="prevItem">Previous</button>
+            <button @click="nextItem">Next</button>
+         </div>
+      </div>
+      <script src="./data/data.js"></script>
+      <script>
+         const app = Vue.createApp({
+            data() {
+               return {
+                  items: data, // Import the data array from data.js
+                  currentIndex: 0,
+                  showDesc: true,
+               };
+            },
+            computed: {
+               currentItem() {
+                  return this.items[this.currentIndex];
+               },
+            },
+            methods: {
+               nextItem() {
+                  this.currentIndex = (this.currentIndex + 1) % this.items.length;
+               },
+               prevItem() {
+                  this.currentIndex =
+                     (this.currentIndex - 1 + this.items.length) % this.items.length;
+               },
+            },
+         });
+
+         app.mount('#app');
+      </script>
+
+      <footer>
+         <p>
+            Copyright © 2024 ILAC and EFREI Paris - Created by : Théo BRACQUEMART ; Arthur
+            BRIDE--GIRARDOT ; Thomas DOS SANTOS ; Louis TECHER - All rights reserved
+         </p>
+      </footer>
+   </body>
+</html>
